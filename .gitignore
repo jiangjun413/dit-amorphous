@@ -1,0 +1,5 @@
+# Never publish local context or editor/notebook scratch
+CLAUDE.md
+.claude/
+.ipynb_checkpoints/
+__pycache__/

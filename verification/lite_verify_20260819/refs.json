@@ -1,0 +1,221 @@
+{
+  "GeO2m": {
+    "chemistry": "GeO2",
+    "species": [
+      "Ge",
+      "O"
+    ],
+    "rho_gen": 3.746,
+    "gen": [
+      "GeO2m_r0",
+      "GeO2m_r1",
+      "GeO2m_r2"
+    ],
+    "refs": [
+      {
+        "label": "GeO2_relax_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/GeO/relax/s00_08_GeO_relax_300K/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": true,
+        "figure": "main",
+        "note": "IBRION=2 ISIF=2 ENCUT520 relaxation of the 360-atom melt-quenched a-GeO2 (origin mp-7812 melt-quench, NOT model-seeded); last 10 ionic steps; rho 3.746; epa -6.3414 = the paper's training minimum"
+      },
+      {
+        "label": "GeO2_MD_10to300K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/GeO/md_nvt/s00_08_GeO_300K_MD/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "in_lite_corpus": true,
+        "figure": "finiteT",
+        "note": "IBRION=0 SMASS=0 Nose NVT, POTIM 1 fs, NSW 1000 (1 ps), TEBEG 10 -> TEEND 300 K: a HEATING RAMP, not isothermal 300 K. 360 atoms, all 1000 frames. This is the reference behind paper Fig. 8."
+      }
+    ]
+  },
+  "GeO2": {
+    "chemistry": "GeO2",
+    "species": [
+      "Ge",
+      "O"
+    ],
+    "rho_gen": 3.65,
+    "gen": [
+      "GeO2_r0",
+      "GeO2_r1",
+      "GeO2_r2"
+    ],
+    "refs": [
+      {
+        "label": "GeO2_comp00_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/GeO/relax/s04_vasp_relax_comp_00_001/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": false,
+        "figure": "aux",
+        "note": "300-atom Ge100O200 DFT relaxation, rho 3.683, epa -6.3330, last 10 ionic steps; NOT in the lite corpus"
+      }
+    ]
+  },
+  "GeO2big": {
+    "chemistry": "GeO2",
+    "species": [
+      "Ge",
+      "O"
+    ],
+    "rho_gen": 3.65,
+    "gen": [
+      "GeO2big_r0"
+    ],
+    "refs": []
+  },
+  "TiGeO": {
+    "chemistry": "TiGeO",
+    "species": [
+      "Ti",
+      "Ge",
+      "O"
+    ],
+    "rho_gen": 3.7,
+    "gen": [
+      "TiGeO_r0",
+      "TiGeO_r1",
+      "TiGeO_r2"
+    ],
+    "refs": [
+      {
+        "label": "TiGeO_720atom_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/TiGeO/relax/s00_07_TiGeO_01_relax_002_720_44_0_3.7_135_480_105_0_1000ps_01_DFT_relax/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": false,
+        "figure": "main",
+        "note": "the paper's Fig. 9 reference: 720-atom Ti105Ge135O480 (43.75% Ti) DFT relaxation at rho 3.701, epa -7.4249, last 10 ionic steps; NOT in the lite corpus"
+      }
+    ]
+  },
+  "TiO2m": {
+    "chemistry": "TiO2",
+    "species": [
+      "Ti",
+      "O"
+    ],
+    "rho_gen": 2.66,
+    "gen": [
+      "TiO2m_r0",
+      "TiO2m_r1",
+      "TiO2m_r2"
+    ],
+    "refs": [
+      {
+        "label": "TiO2_relax11_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/TiO/relax/s10_relax11_r11_TiO_sb18_r28k0x0/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": false,
+        "figure": "main",
+        "note": "240-atom Ti80O160 DFT relaxation at rho 2.660, epa -8.8542 (the ENERGY_REFERENCES relax11 a-TiO2 record); last 10 ionic steps; NOT in the lite corpus. CAVEAT: the seed was a diffusion-generated cell, so this is a DFT inherent structure whose basin was model-chosen"
+      }
+    ]
+  },
+  "TiO2": {
+    "chemistry": "TiO2",
+    "species": [
+      "Ti",
+      "O"
+    ],
+    "rho_gen": 2.7,
+    "gen": [
+      "TiO2_r0",
+      "TiO2_r1",
+      "TiO2_r2"
+    ],
+    "refs": [
+      {
+        "label": "TiO2_relax13_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/TiO/relax/s10_relax13_r13_TiO_sb18_r16k1x0/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": true,
+        "figure": "aux",
+        "note": "240-atom Ti80O160 DFT relaxation at rho 2.680, epa -8.8548 (the campaign a-TiO2 AMF); last 10 ionic steps; IS in the lite corpus"
+      }
+    ]
+  },
+  "HfO2": {
+    "chemistry": "HfO2",
+    "species": [
+      "Hf",
+      "O"
+    ],
+    "rho_gen": 9.4,
+    "gen": [
+      "HfO2_r0",
+      "HfO2_r1",
+      "HfO2_r2"
+    ],
+    "refs": [
+      {
+        "label": "HfO2_relax11_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/HfO/relax/s10_relax11_r11_HfO_sb17_r11k0x0/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 10,
+        "in_lite_corpus": false,
+        "figure": "main",
+        "note": "240-atom Hf80O160 DFT relaxation at rho 9.400, epa -10.9348 (the ENERGY_REFERENCES relax11 a-HfO2 value); last 10 ionic steps; NOT in the lite corpus. Same model-seeded-basin caveat as TiO2"
+      }
+    ]
+  },
+  "HfO2m": {
+    "chemistry": "HfO2",
+    "species": [
+      "Hf",
+      "O"
+    ],
+    "rho_gen": 8.897,
+    "gen": [
+      "HfO2m_r0",
+      "HfO2m_r1",
+      "HfO2m_r2"
+    ],
+    "refs": [
+      {
+        "label": "HfO2_inherent_0K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/HfO/relax/s00_16_HfO_03_best_aHfO2_03_md_relax_s01/vasprun.xml",
+          "<dft-archive>/07_trainingset2/HfO/relax/s00_16_HfO_03_best_aHfO2_03_md_relax_s02/vasprun.xml",
+          "<dft-archive>/07_trainingset2/HfO/relax/s00_16_HfO_03_best_aHfO2_03_md_relax_s04/vasprun.xml",
+          "<dft-archive>/07_trainingset2/HfO/relax/s00_16_HfO_03_best_aHfO2_03_md_relax_s05/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "last": 5,
+        "in_lite_corpus": false,
+        "figure": "aux",
+        "note": "four independent DFT relaxations (IBRION=2) of snapshots of the same 96-atom 300 K a-HfO2 Langevin MD, rho 8.900, last 5 ionic steps of each = 20 frames; these are the 0 K inherent structures OF the finite-T reference, at the same density, and NONE of s01/s02/s04/s05 is in the lite corpus"
+      },
+      {
+        "label": "HfO2_MD_300K",
+        "paths": [
+          "<dft-archive>/07_trainingset2/HfO/md_nvt/s00_16_HfO_03_best_aHfO2_02_md_300K/vasprun.xml"
+        ],
+        "format": "vasprun",
+        "stride": 3,
+        "in_lite_corpus": true,
+        "figure": "finiteT",
+        "note": "IBRION=0 MDALGO=3 Langevin, TEBEG=TEEND=300 K, POTIM 1 fs, NSW 3000 (3 ps): genuine isothermal 300 K. Hf32O64 (96 atoms), rho 8.897, every 3rd frame = 1000 frames"
+      }
+    ]
+  }
+}
