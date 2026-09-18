@@ -119,6 +119,18 @@ Not deposited: the training pipeline, the dataset and graph-building code, the
 distributed-training layer and the Streamlit user interface. Those are
 available from the corresponding author on reasonable request.
 
+## Licence
+
+The code in `dit2/`, and `requirements-generation.txt`, are released under the
+**MIT licence** (see `LICENSE`).
+
+The MIT licence does **not** extend to the deposited data artefacts: the model
+checkpoints, the generated configurations, the energy tables and maps, the
+training-loss curves and the verification output. No separate licence has been
+chosen for those yet, so no rights beyond ordinary academic use with citation
+should be assumed for them; ask the corresponding author if you need explicit
+terms.
+
 ## Provenance and integrity
 
 `MANIFEST.tsv` lists every deposited file with its size and SHA-256. Absolute
