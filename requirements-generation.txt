@@ -1,0 +1,11 @@
+# Runtime dependencies of the generation code in dit2/.
+# Versions are the ones the deposited results were produced and verified with;
+# the code is not pinned to them.
+torch==2.10.0
+e3nn==0.5.9
+torch_geometric==2.7.0
+torch_scatter==2.1.2
+ase==3.27.0
+numpy==2.2.6
+scipy==1.15.3
+matplotlib==3.10.8

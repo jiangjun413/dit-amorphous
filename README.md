@@ -13,7 +13,7 @@ rather than by number, because numbering shifts between revisions.
 
 | file | role | parameters | unpickles with |
 |---|---|---|---|
-| `production_generator_g2_min1_full_ema.pt` | the generator behind every configuration in `sec:rdf`, `sec:assistedopt`, `sec:versatility` | 595,376 | `dit2` |
+| `production_generator_g2_min1_full_ema.pt` | the generator behind every configuration in `sec:rdf`, `sec:assistedopt`, `sec:versatility` | 595,376 | `dit2/`, **included here** |
 | `sparse_corpus_g6_lite_840k_ema.pt` | the 1,781-configuration data-requirement test (`tab:liteverify`) | 606,584 | `dit6` |
 | `checkpoint_run_4040k_ema.pt` | final checkpoint of the single run followed in `tab:checkpoints` | 625,669 | `dit6` |
 
@@ -23,11 +23,20 @@ embedding scales with the number of chemical species in each run's corpus at
 otherwise identical architecture.
 
 Each file is a **pickled model object**, not a bare `state_dict`, so
-`torch.load` needs the package that wrote it on `sys.path`. That package is not
-in this deposit; `torch.load` will raise `ModuleNotFoundError` without it. The
-weights are deposited so that the models behind the reported results are
-archived and checkable against `MANIFEST.tsv`. Request the loader from the
-corresponding author.
+`torch.load` needs the package that wrote it on `sys.path`. For the production
+generator that package is `dit2/`, deposited here, so it loads directly:
+
+```python
+import sys, torch; sys.path.insert(0, ".")
+model = torch.load("checkpoints/production_generator_g2_min1_full_ema.pt",
+                   map_location="cpu", weights_only=False)
+```
+
+The other two were written by `dit6`, a sibling package that is not deposited,
+and `torch.load` on them raises `ModuleNotFoundError: No module named 'dit6'`.
+They are deposited so the weights behind those results are archived and
+checkable against `MANIFEST.tsv`; request that loader from the corresponding
+author.
 
 ## `structures/`
 
@@ -76,6 +85,40 @@ both sides. `analysis/*.npz` holds the raw g(r) arrays and CN histograms;
 the campaign's own write-ups; `refs.json` records which DFT calculation each
 reference came from.
 
+## `dit2/` — generation code
+
+The generation path of the DiT package: the network definition, the checkpoint
+loader, the sampler, the neighbour-list and structure builders, and the
+RDF/coordination analysis. 20 modules, no training code. This is what is needed
+to load the deposited production checkpoint and to generate and analyse
+configurations with it.
+
+```
+dit2/model/        network definition (graphite backbone, convolutions,
+                   embeddings, EMA wrapper) -- required to unpickle a checkpoint
+dit2/generation/   sampler (core), neighbour lists, structure construction,
+                   RDF/CN analysis, interfaces, multi-GPU, config search, TLS
+dit2/compat.py     checkpoint-compatibility patches and the model loader
+dit2/constants.py  element tables and cutoffs
+dit2/config.py     configuration parsing
+dit2/utils/        physics helpers
+```
+
+Dependencies and the versions this was verified with are in
+`requirements-generation.txt`. Conditioned generation additionally requires the
+per-chemistry energy floor of the checkpoint's own training corpus, which is an
+input the caller supplies, not a property of the weights.
+
+Verified after assembling this subset, with only these 20 modules on
+`sys.path`: it imports, it loads the production checkpoint (595,376
+parameters), and its analysis code run on `structures/generated_GeO2_3000atom.vasp`
+returns an O--O first peak at 2.851 Å, Ge--Ge at 3.181 Å, Ge--O at 1.751 Å (one
+histogram bin from the 1.770 Å reported), and four-fold Ge coordination.
+
+Not deposited: the training pipeline, the dataset and graph-building code, the
+distributed-training layer and the Streamlit user interface. Those are
+available from the corresponding author on reasonable request.
+
 ## Provenance and integrity
 
 `MANIFEST.tsv` lists every deposited file with its size and SHA-256. Absolute
@@ -86,7 +129,9 @@ calculation without the archive's internal layout.
 
 ## What is not here
 
-- **The code.** Training, generation and analysis code is not deposited here.
+- **The training code.** The generation path is in `dit2/`; the training
+  pipeline, the dataset and graph-building code, the distributed-training layer
+  and the Streamlit interface are not deposited.
 - **The coordinates of the N = 300,000-atom a-GeO₂ cell.** Not retained after
   the run; only the render survives. That run is quoted for generation cost and
   system size, and the structural comparison is made at the deposited cell size.
